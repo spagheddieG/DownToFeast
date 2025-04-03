@@ -1,8 +1,7 @@
 import SwiftUI
 
 struct PreferenceView: View {
-    @State private var selectedCuisines: Set<CuisineType> = []
-    @AppStorage("searchRadiusMiles") private var searchRadiusMiles: Double = 10.0
+    @StateObject private var viewModel = PreferenceViewModel()
 
     var body: some View {
         VStack(spacing: 20) {
@@ -13,11 +12,7 @@ struct PreferenceView: View {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 16) {
                 ForEach(CuisineType.allCases, id: \.self) { cuisine in
                     Button(action: {
-                        if selectedCuisines.contains(cuisine) {
-                            selectedCuisines.remove(cuisine)
-                        } else {
-                            selectedCuisines.insert(cuisine)
-                        }
+                        viewModel.toggleCuisine(cuisine)
                     }) {
                         VStack {
                             Text(cuisine.emoji)
@@ -27,18 +22,18 @@ struct PreferenceView: View {
                         }
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(selectedCuisines.contains(cuisine) ? Color.blue : Color.gray.opacity(0.2))
-                        .foregroundColor(selectedCuisines.contains(cuisine) ? .white : .black)
+                        .background(viewModel.selectedCuisines.contains(cuisine) ? Color.blue : Color.gray.opacity(0.2))
+                        .foregroundColor(viewModel.selectedCuisines.contains(cuisine) ? .white : .black)
                         .cornerRadius(10)
                     }
                 }
             }
 
             VStack(spacing: 8) {
-                Text("Search Radius: \(Int(searchRadiusMiles)) miles")
+                Text("Search Radius: \(Int(viewModel.searchRadiusMiles)) miles")
                     .font(.headline)
 
-                Stepper(value: $searchRadiusMiles, in: 1...50, step: 1) {
+                Stepper(value: $viewModel.searchRadiusMiles, in: 1...50, step: 1) {
                     Text("Adjust Radius")
                 }
             }
@@ -47,9 +42,7 @@ struct PreferenceView: View {
             .cornerRadius(10)
 
             Button(action: {
-                let preferenceStrings = selectedCuisines.map { $0.rawValue }
-                UserDefaults.standard.set(preferenceStrings, forKey: "userPreferences")
-                UserDefaults.standard.set(searchRadiusMiles*1609, forKey: "searchRadiusMiles")
+                viewModel.savePreferences()
             }) {
                 Text("Save Preferences")
                     .padding()
@@ -60,8 +53,5 @@ struct PreferenceView: View {
             }
         }
         .padding()
-        .onAppear {
-            selectedCuisines = CuisineType.getSavedPreferences()
-        }
     }
 }
