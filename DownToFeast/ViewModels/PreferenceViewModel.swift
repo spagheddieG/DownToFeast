@@ -19,7 +19,7 @@ class PreferenceViewModel: ObservableObject {
     func savePreferences() {
         let preferenceStrings = selectedCuisines.map { $0.rawValue }
         UserDefaults.standard.set(preferenceStrings, forKey: "userPreferences")
-        UserDefaults.standard.set(searchRadiusMiles * 1609, forKey: "searchRadiusMiles")
+        UserDefaults.standard.set(searchRadiusMiles, forKey: "searchRadiusMiles")
     }
 
     private func loadPreferences() {
