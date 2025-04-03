@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		889BFD432D9D9D7A00453568 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 889BFD422D9D9D7A00453568 /* CoreLocation.framework */; };
 		88A02F472D9E225A00F597E0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 88A02F462D9E225400F597E0 /* .gitignore */; };
+		88A02F6C2D9E40E300F597E0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 88A02F6B2D9E40E300F597E0 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		888C69A52D9D957000C81A3A /* DownToFeast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownToFeast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		889BFD422D9D9D7A00453568 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		88A02F462D9E225400F597E0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		88A02F6B2D9E40E300F597E0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +46,7 @@
 				889BFD412D9D9D7A00453568 /* Frameworks */,
 				888C69A62D9D957000C81A3A /* Products */,
 				88A02F462D9E225400F597E0 /* .gitignore */,
+				88A02F6B2D9E40E300F597E0 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88A02F6C2D9E40E300F597E0 /* README.md in Resources */,
 				88A02F472D9E225A00F597E0 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

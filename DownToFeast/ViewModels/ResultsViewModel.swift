@@ -14,6 +14,7 @@ class ResultsViewModel: ObservableObject {
     
     var locationService: LocationService
     private var cancellables = Set<AnyCancellable>()
+    private var lastFetchedLocation: CLLocation?
     
     init(restaurants: [Restaurant] = [], locationService: LocationService = LocationService()) {
         self.restaurants = restaurants
@@ -25,9 +26,12 @@ class ResultsViewModel: ObservableObject {
         locationService.$userLocation
             .receive(on: DispatchQueue.main)
             .sink { [weak self] newLocation in
-                if newLocation != nil {
-                    self?.fetchRestaurants()
+                guard let newLocation = newLocation else { return }
+                if let lastLocation = self?.lastFetchedLocation, newLocation.distance(from: lastLocation) < 100 {
+                    return
                 }
+                self?.lastFetchedLocation = newLocation
+                self?.fetchRestaurants()
             }
             .store(in: &cancellables)
     }

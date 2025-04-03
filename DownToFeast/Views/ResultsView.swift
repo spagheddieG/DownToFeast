@@ -25,9 +25,6 @@ struct ResultsView: View {
             }
         }
         .onAppear(perform: viewModel.fetchRestaurants)
-        .onChange(of: viewModel.locationService.userLocation) { _, _ in
-            viewModel.fetchRestaurants()
-        }
     }
     
     private var restaurantListView: some View {
